@@ -17,6 +17,8 @@ import com.baoyz.swipemenulistview.SwipeMenuView.OnSwipeItemClickListener;
  * 
  * @author baoyz
  * @date 2014-8-24
+ * @modify larry.wei@gmail.com
+ * @date 2015-2-4
  * 
  */
 public class SwipeMenuAdapter implements WrapperListAdapter,
@@ -25,10 +27,16 @@ public class SwipeMenuAdapter implements WrapperListAdapter,
 	private ListAdapter mAdapter;
 	private Context mContext;
 	private OnMenuItemClickListener onMenuItemClickListener;
+	private View customMenuView;
 
 	public SwipeMenuAdapter(Context context, ListAdapter adapter) {
+		this(context, adapter, null);
+	}
+	
+	public SwipeMenuAdapter(Context context, ListAdapter adapter, View menuView) {
 		mAdapter = adapter;
 		mContext = context;
+		customMenuView = menuView;
 	}
 
 	@Override
@@ -69,22 +77,22 @@ public class SwipeMenuAdapter implements WrapperListAdapter,
 			View view = mAdapter.getView(position, layout.getContentView(),
 					parent);
 		}
+		updateMenuView(position, layout.getMenuView());
 		return layout;
 	}
 
+	/**
+	 * TO BE OVERRIDE
+	 * */
+	public void updateMenuView(int position, SwipeMenuView menuView) {
+		
+	}
+	
+	/**
+	 * TO BE OVERRIDE
+	 * */
 	public void createMenu(SwipeMenu menu) {
-		// Test Code
-		SwipeMenuItem item = new SwipeMenuItem(mContext);
-		item.setTitle("Item 1");
-		item.setBackground(new ColorDrawable(Color.GRAY));
-		item.setWidth(300);
-		menu.addMenuItem(item);
-
-		item = new SwipeMenuItem(mContext);
-		item.setTitle("Item 2");
-		item.setBackground(new ColorDrawable(Color.RED));
-		item.setWidth(300);
-		menu.addMenuItem(item);
+		
 	}
 
 	@Override

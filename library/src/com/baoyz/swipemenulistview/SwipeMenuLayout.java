@@ -24,8 +24,8 @@ import android.widget.FrameLayout;
  */
 public class SwipeMenuLayout extends FrameLayout {
 
-	private static final int CONTENT_VIEW_ID = 1;
-	private static final int MENU_VIEW_ID = 2;
+	public static final int CONTENT_VIEW_ID = 1;
+	public static final int MENU_VIEW_ID = 2;
 
 	private static final int STATE_CLOSE = 0;
 	private static final int STATE_OPEN = 1;

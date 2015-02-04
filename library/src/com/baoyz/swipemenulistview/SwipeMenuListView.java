@@ -35,6 +35,7 @@ public class SwipeMenuListView extends ListView {
 	private OnMenuItemClickListener mOnMenuItemClickListener;
 	private Interpolator mCloseInterpolator;
 	private Interpolator mOpenInterpolator;
+	private IUpdateMenuView iUpdateMenuViewListener;
 
 	public SwipeMenuListView(Context context) {
 		super(context);
@@ -60,6 +61,13 @@ public class SwipeMenuListView extends ListView {
 	@Override
 	public void setAdapter(ListAdapter adapter) {
 		super.setAdapter(new SwipeMenuAdapter(getContext(), adapter) {
+			@Override
+			public void updateMenuView(int position, SwipeMenuView menuView) {
+				if (iUpdateMenuViewListener != null) {
+					iUpdateMenuViewListener.updateMenuView(position, menuView);
+				}
+			}
+			
 			@Override
 			public void createMenu(SwipeMenu menu) {
 				if (mMenuCreator != null) {
@@ -215,6 +223,10 @@ public class SwipeMenuListView extends ListView {
 		this.mOnSwipeListener = onSwipeListener;
 	}
 
+	public void setUpdateMenuInterface(IUpdateMenuView iUpdateInterface) {
+		this.iUpdateMenuViewListener = iUpdateInterface;
+	}
+	
 	public static interface OnMenuItemClickListener {
 		boolean onMenuItemClick(int position, SwipeMenu menu, int index);
 	}
@@ -223,5 +235,9 @@ public class SwipeMenuListView extends ListView {
 		void onSwipeStart(int position);
 
 		void onSwipeEnd(int position);
+	}
+	
+	public static interface IUpdateMenuView {
+		public void updateMenuView(int position, SwipeMenuView menuView);
 	}
 }
