@@ -20,6 +20,8 @@ public class SwipeMenuItem {
 	private int titleColor;
 	private int titleSize;
 	private int width;
+	//custom menu view resId
+	private int cusViewResId = -1;
 
 	public SwipeMenuItem(Context context) {
 		mContext = context;
@@ -93,4 +95,11 @@ public class SwipeMenuItem {
 		this.width = width;
 	}
 
+	public int getCustomViewResId() {
+		return cusViewResId;
+	}
+	
+	public void setCustomViewResId(int resId) {
+		this.cusViewResId = resId;
+	}
 }

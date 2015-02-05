@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -44,6 +45,15 @@ public class SwipeMenuView extends LinearLayout implements OnClickListener {
 	}
 
 	private void addItem(SwipeMenuItem item, int id) {
+		if (item.getCustomViewResId() > 0) {
+			LayoutParams params = new LayoutParams(item.getWidth(),
+					LayoutParams.MATCH_PARENT);
+			View cusView = LayoutInflater.from(getContext()).inflate(item.getCustomViewResId(), null);
+			cusView.setId(id);
+			cusView.setLayoutParams(params);
+			addView(cusView);
+			return;
+		}
 		LayoutParams params = new LayoutParams(item.getWidth(),
 				LayoutParams.MATCH_PARENT);
 		LinearLayout parent = new LinearLayout(getContext());
